@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Desenhando na canvas</title>
+    <script>
+        window.onload = function () {
+            //todo conteúdo ficará aqui
+            //https://www.devmedia.com.br/desenhando-com-o-mouse-na-canvas-da-html5/27619
+            var largura = 800;
+            var altura = 800;
+
+            var quadro = document.getElementById("quadro");
+            quadro.setAttribute("width", largura);
+            quadro.setAttribute("height", altura);
+
+            var ctx = quadro.getContext("2d");
+
+            var desenhando = false;
+
+            quadro.onmousedown = function (evt) {
+                ctx.moveTo(evt.clientX, evt.clientY);
+                desenhando = true;
+            }
+
+            quadro.onmouseup = function () {
+                desenhando = false;
+            }
+
+            quadro.onmousemove = function (evt) {
+                if (desenhando) {
+                    console.warn(evt.clientX, evt.clientY)
+                    ctx.lineTo(evt.clientX, evt.clientY);
+                    ctx.stroke();
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="quadro" style="background:beige"></canvas>
+</body>
+
+</html>
